@@ -1,0 +1,13 @@
+.movie-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.each-movie {
+    margin: 5px;
+}
+
+button {
+    border: 1px solid black;
+}

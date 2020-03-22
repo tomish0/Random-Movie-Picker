@@ -2,21 +2,7 @@ import React, { Component } from "react";
 import "../Styles/GenreFilter.css";
 
 class GenreFilter extends Component {
-  state = {
-    filteredFilms: []
-  };
-
-  handleSelect = event => {
-    const genreSelection = event.target.value;
-    const filteredFilms = [];
-    this.props.movieData.movies.filter(movie => {
-      if (movie.genres.includes(genreSelection)) {
-        filteredFilms.unshift(movie);
-      }
-    });
-    this.setState({ filteredFilms });
-    console.log(this.state.filteredFilms);
-  };
+  state = {};
 
   render() {
     const genres = this.props.movieData.genres;
@@ -26,7 +12,7 @@ class GenreFilter extends Component {
         <select
           id="genreFilter"
           className="drop-down"
-          onChange={this.handleSelect}
+          onChange={this.props.handleSelect}
         >
           <option value="All">All</option>
           {genres.map((genre, i) => {

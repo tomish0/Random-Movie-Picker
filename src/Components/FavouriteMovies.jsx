@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import RandomPick from "./RandomPick";
 import { Route, Link, Switch } from "react-router-dom";
-import "../Styles/Movie.css";
-import GenreFilter from "./GenreFilter";
 
-class Movie extends Component {
+class FavouriteMovies extends Component {
   state = {
     favourites: []
   };
@@ -14,9 +12,8 @@ class Movie extends Component {
     let randomFilm = favourites[Math.floor(Math.random() * favourites.length)];
     return randomFilm;
   };
-
+  
   render() {
-    const movies = this.props.movieData.movies;
     const favourites = this.state.favourites;
     return (
       <div>
@@ -52,29 +49,9 @@ class Movie extends Component {
           />
           <Route exact path="/" />
         </Switch>
-        <h1>All Movies</h1>
-        <GenreFilter movieData={this.props.movieData} />
-        <div>
-          {movies.map((movie, i) => {
-            return (
-              <div className="movie-wrapper" key={i}>
-                <div className="each-movie">{movie.title}</div>
-                <button
-                  onClick={() => {
-                    let favourites = [...this.state.favourites];
-                    favourites.unshift(movie.title);
-                    this.setState({ favourites });
-                  }}
-                >
-                  Add to Favourites
-                </button>
-              </div>
-            );
-          })}
-        </div>
       </div>
     );
   }
 }
 
-export default Movie;
+export default FavouriteMovies;

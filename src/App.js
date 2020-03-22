@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+// import GenreFilter from "./Components/GenreFilter";
 import Movie from "./Components/Movie";
+import "./App.css";
 
 class App extends Component {
   state = {
@@ -15,20 +17,23 @@ class App extends Component {
         return response.json();
       })
       .then(data => {
-        console.log(data);
-        this.setState({ movieData: data,
-        haveMovies: true });
+        this.setState({ movieData: data, haveMovies: true });
         console.log(this.state.movieData);
       })
       .catch(err => {
         console.log(err);
-      }); 
+      });
   }
 
   render() {
     return (
-      <div>
-        {this.state.haveMovies ? <Movie movieData={this.state.movieData} /> : null}
+      <div className="App">
+        {this.state.haveMovies ? (
+          <div>
+            {/* <GenreFilter movieData={this.state.movieData} /> */}
+            <Movie movieData={this.state.movieData} />
+          </div>
+        ) : null}
       </div>
     );
   }

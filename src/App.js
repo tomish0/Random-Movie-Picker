@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Link, Switch } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import GenreFilter from "./Components/GenreFilter";
 import AllMovies from "./Components/AllMovies";
 import FavouriteMovies from "./Components/FavouriteMovies";
@@ -35,7 +35,6 @@ class App extends Component {
 
   handleSelect = event => {
     const genreSelection = event.target.value;
-    console.log(genreSelection);
     const filteredFilms = [];
     this.state.movieData.movies.filter(movie => {
       if (movie.genres.includes(genreSelection)) {
@@ -47,7 +46,6 @@ class App extends Component {
 
   addFavMovie = favourites => {
     this.setState({ favourites });
-    console.log(this.state.genreSelection)
   };
 
   removeFavMovie = favourites => {
@@ -75,7 +73,6 @@ class App extends Component {
         <Link to="/random-pick-Movies" onClick={() => this.findRandomMovie()}>
           Pick A Random Movie
         </Link>
-
         {this.state.favourites.length > 0 ? (
           <div>
             {this.state.favourites.length > 1 ? (
@@ -109,6 +106,7 @@ class App extends Component {
             <GenreFilter
               movieData={this.state.movieData}
               handleSelect={this.handleSelect}
+              genreSelection={this.state.genreSelection}
             />
             <AllMovies
               movieData={this.state.movieData}

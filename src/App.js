@@ -14,7 +14,8 @@ class App extends Component {
     favourites: [],
     filteredFilms: [],
     randomMovie: "",
-    randomFavMovie: ""
+    randomFavMovie: "",
+    genreSelection: ''
   };
 
   componentDidMount() {
@@ -34,13 +35,14 @@ class App extends Component {
 
   handleSelect = event => {
     const genreSelection = event.target.value;
+    console.log(genreSelection);
     const filteredFilms = [];
     this.state.movieData.movies.filter(movie => {
       if (movie.genres.includes(genreSelection)) {
         filteredFilms.unshift(movie);
       }
     });
-    this.setState({ filteredFilms });
+    this.setState({ filteredFilms, genreSelection });
   };
 
   addFavMovie = favourites => {
@@ -54,12 +56,10 @@ class App extends Component {
   findRandomMovie = () => {
     const movies = this.state.movieData.movies;
     let randomMovie = movies[Math.floor(Math.random() * movies.length)];
-    console.log(randomMovie.title);
     this.setState({ randomMovie: randomMovie.title });
   };
 
   findRandomFavMovie = () => {
-    console.log(this.state.favourites);
     let randomFavMovie = this.state.favourites[
       Math.floor(Math.random() * this.state.favourites.length)
     ];
@@ -67,8 +67,6 @@ class App extends Component {
   };
 
   render() {
-    // console.log(this.state.movieData);
-    // console.log(this.state.randomMovie);
     return (
       <div className="App">
         <Link to="/">Home</Link>

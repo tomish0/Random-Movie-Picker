@@ -17,7 +17,9 @@ class AllMovies extends Component {
                     <button
                       onClick={() => {
                         let favourites = [...this.props.favourites];
-                        favourites.unshift(filteredFilm.title);
+                        if (!favourites.includes(filteredFilm.title)) {
+                          favourites.unshift(filteredFilm.title)
+                        }
                         this.props.addFavMovie(favourites);
                       }}
                     >
@@ -33,7 +35,9 @@ class AllMovies extends Component {
                     <button
                       onClick={() => {
                         let favourites = [...this.props.favourites];
-                        favourites.unshift(movie.title);
+                        if (!favourites.includes(movie.title)) {
+                          favourites.unshift(movie.title);
+                        }
                         this.props.addFavMovie(favourites);
                       }}
                     >

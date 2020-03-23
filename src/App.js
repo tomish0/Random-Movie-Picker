@@ -47,6 +47,7 @@ class App extends Component {
 
   addFavMovie = favourites => {
     this.setState({ favourites });
+    console.log(this.state.genreSelection)
   };
 
   removeFavMovie = favourites => {

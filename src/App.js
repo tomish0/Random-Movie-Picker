@@ -15,7 +15,7 @@ class App extends Component {
     filteredFilms: [],
     randomMovie: "",
     randomFavMovie: "",
-    genreSelection: ''
+    genreSelection: ""
   };
 
   componentDidMount() {
@@ -47,7 +47,6 @@ class App extends Component {
 
   addFavMovie = favourites => {
     this.setState({ favourites });
-    console.log(this.state.genreSelection)
   };
 
   removeFavMovie = favourites => {
@@ -75,70 +74,80 @@ class App extends Component {
         <Link to="/random-pick-Movies" onClick={() => this.findRandomMovie()}>
           Pick A Random Movie
         </Link>
-
-        {this.state.favourites.length > 0 ? (
-          <div>
-            {this.state.favourites.length > 1 ? (
-              <Link
-                to="/random-pick-Fav-Movies"
-                onClick={() => this.findRandomFavMovie()}
-              >
-                Pick A Random Movie From Your Favourites
-              </Link>
-            ) : null}
-            <br></br>
-            <Route
-              exact
-              path="/random-pick-Movies"
-              component={() => (
-                <RandomPick randomMovie={this.state.randomMovie} />
-              )}
-            />
-            <Route
-              exact
-              path="/random-pick-Fav-Movies"
-              component={() => (
-                <RandomFavPick randomFavMovie={this.state.randomFavMovie} />
-              )}
-            />
-            <FavouriteMovies
-              favourites={this.state.favourites}
-              removeFavMovie={this.removeFavMovie}
-            />
-            <h1>All Movies</h1>
-            <GenreFilter
-              movieData={this.state.movieData}
-              handleSelect={this.handleSelect}
-            />
-            <AllMovies
-              movieData={this.state.movieData}
-              addFavMovie={this.addFavMovie}
-              favourites={this.state.favourites}
-              filteredFilms={this.state.filteredFilms}
-            />
-          </div>
-        ) : this.state.haveMovies ? (
-          <div>
-            <Route
-              exact
-              path="/random-pick-Movies"
-              component={() => (
-                <RandomPick randomMovie={this.state.randomMovie} />
-              )}
-            />
-            <h1>All Movies</h1>
-            <GenreFilter
-              movieData={this.state.movieData}
-              handleSelect={this.handleSelect}
-            />
-            <AllMovies
-              movieData={this.state.movieData}
-              addFavMovie={this.addFavMovie}
-              favourites={this.state.favourites}
-              filteredFilms={this.state.filteredFilms}
-            />
-          </div>
+        <br></br>
+        {this.state.favourites.length > 1 ? (
+          <Link
+            to="/random-pick-Fav-Movies"
+            onClick={() => this.findRandomFavMovie()}
+          >
+            Pick A Random Movie From Your Favourites
+          </Link>
         ) : null}
+        <Switch>
+          <Route
+            exact
+            path="/random-pick-Movies"
+            component={() => (
+              <RandomPick randomMovie={this.state.randomMovie} />
+            )}
+          />
+          <Route
+            exact
+            path="/random-pick-Fav-Movies"
+            component={() => (
+              <RandomFavPick randomFavMovie={this.state.randomFavMovie} />
+            )}
+          />
+          <Route
+            exact
+            path="/"
+            component={() =>
+              this.state.favourites.length > 0 ? (
+                <div>
+                  <br></br>
+                  <FavouriteMovies
+                    favourites={this.state.favourites}
+                    removeFavMovie={this.removeFavMovie}
+                  />
+                  <h1>All Movies</h1>
+                  <GenreFilter
+                    movieData={this.state.movieData}
+                    handleSelect={this.handleSelect}
+                    genreSelection={this.state.genreSelection}
+                  />
+                  <AllMovies
+                    movieData={this.state.movieData}
+                    addFavMovie={this.addFavMovie}
+                    favourites={this.state.favourites}
+                    filteredFilms={this.state.filteredFilms}
+                  />
+                </div>
+              ) : this.state.haveMovies ? (
+                <div>
+                  <Route
+                    exact
+                    path="/random-pick-Movies"
+                    component={() => (
+                      <RandomPick randomMovie={this.state.randomMovie} />
+                    )}
+                  />
+                  <h1>All Movies</h1>
+                  <GenreFilter
+                    movieData={this.state.movieData}
+                    handleSelect={this.handleSelect}
+                    genreSelection={this.state.genreSelection}
+                  />
+                  <AllMovies
+                    movieData={this.state.movieData}
+                    addFavMovie={this.addFavMovie}
+                    favourites={this.state.favourites}
+                    filteredFilms={this.state.filteredFilms}
+                  />
+                </div>
+              ) : null
+            }
+          />
+        </Switch>
       </div>
     );
   }

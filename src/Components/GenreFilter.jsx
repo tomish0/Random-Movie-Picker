@@ -13,6 +13,7 @@ class GenreFilter extends Component {
           id="genreFilter"
           className="drop-down"
           onChange={this.props.handleSelect}
+          value={this.props.genreSelection}
         >
           <option value="All">All</option>
           {genres.map((genre, i) => {

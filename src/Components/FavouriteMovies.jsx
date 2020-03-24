@@ -12,7 +12,7 @@ class FavouriteMovies extends Component {
           {favourites.map((favFilm, i) => {
             return (
               <div className="movie-wrapper" key={i}>
-                <div className="each-movie">{favFilm}</div>
+                <div className="each-movie"><strong>{favFilm.title}</strong> ({favFilm.year})</div>
                 <button
                   onClick={() => {
                     let favourites = [...this.props.favourites];

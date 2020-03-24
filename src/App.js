@@ -13,8 +13,8 @@ class App extends Component {
     haveMovies: false,
     favourites: [],
     filteredFilms: [],
-    randomMovie: "",
-    randomFavMovie: "",
+    randomMovie: '',
+    randomFavMovie: [],
     genreSelection: ""
   };
 
@@ -56,14 +56,14 @@ class App extends Component {
   findRandomMovie = () => {
     const movies = this.state.movieData.movies;
     let randomMovie = movies[Math.floor(Math.random() * movies.length)];
-    this.setState({ randomMovie: randomMovie.title });
+    this.setState({ randomMovie });
   };
 
   findRandomFavMovie = () => {
     let randomFavMovie = this.state.favourites[
       Math.floor(Math.random() * this.state.favourites.length)
     ];
-    this.setState({ randomFavMovie });
+    this.setState({ randomFavMovie});
   };
 
   render() {
@@ -75,6 +75,7 @@ class App extends Component {
           Pick A Random Movie
         </Link>
         <br></br>
+        
         {this.state.favourites.length > 1 ? (
           <Link
             to="/random-pick-Fav-Movies"

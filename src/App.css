@@ -1,3 +1,38 @@
 .App {
-  padding: 10px
+  padding: 10px;
+  background-color: #0f1412;
+  color: white;
+  height: 100vh;
+  overflow: auto;
+}
+
+nav {
+  margin: 20px 50px;
+  padding: 30px;
+}
+
+.random-links {
+  display: flex;
+  justify-content: space-around;
+  margin-right: 200px;
+}
+
+.home {
+  float: left;
+  margin-right: 70px;
+}
+
+.random-pick-movies {
+  margin-right: 100px;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+  font-size: 55px;
+}
+
+.link:hover {
+  transition-duration: 0.2s;
+  color: rgb(80, 112, 76);
 }

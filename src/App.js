@@ -5,6 +5,7 @@ import AllMovies from "./Components/AllMovies";
 import FavouriteMovies from "./Components/FavouriteMovies";
 import RandomFavPick from "./Components/RandomFavPick";
 import "./App.css";
+import "./Styles/AllMovies.css";
 import RandomPick from "./Components/RandomPick";
 
 class App extends Component {
@@ -13,7 +14,7 @@ class App extends Component {
     haveMovies: false,
     favourites: [],
     filteredFilms: [],
-    randomMovie: '',
+    randomMovie: "",
     randomFavMovie: [],
     genreSelection: ""
   };
@@ -63,27 +64,35 @@ class App extends Component {
     let randomFavMovie = this.state.favourites[
       Math.floor(Math.random() * this.state.favourites.length)
     ];
-    this.setState({ randomFavMovie});
+    this.setState({ randomFavMovie });
   };
 
   render() {
     return (
       <div className="App">
-        <Link to="/">Home</Link>
-        <br></br>
-        <Link to="/random-pick-Movies" onClick={() => this.findRandomMovie()}>
-          Pick A Random Movie
-        </Link>
-        <br></br>
-        
-        {this.state.favourites.length > 1 ? (
-          <Link
-            to="/random-pick-Fav-Movies"
-            onClick={() => this.findRandomFavMovie()}
-          >
-            Pick A Random Movie From Your Favourites
+        <nav>
+          <Link to="/" className="link home">
+            <h1>Home</h1>
           </Link>
-        ) : null}
+          <div className="random-links">
+            <Link
+              to="/random-pick-movies"
+              onClick={() => this.findRandomMovie()}
+              className="link random-pick-movies"
+            >
+              <h1>Random Movie</h1>
+            </Link>
+            {this.state.favourites.length > 1 ? (
+              <Link
+                to="/random-pick-fav-movies"
+                onClick={() => this.findRandomFavMovie()}
+                className="link random-pick-fav-movies"
+              >
+                <h1>Random Favourite</h1>
+              </Link>
+            ) : null}
+          </div>
+        </nav>
         <Switch>
           <Route
             exact
@@ -110,7 +119,7 @@ class App extends Component {
                     favourites={this.state.favourites}
                     removeFavMovie={this.removeFavMovie}
                   />
-                  <h1>All Movies</h1>
+                  <h2>All Movies</h2>
                   <GenreFilter
                     movieData={this.state.movieData}
                     handleSelect={this.handleSelect}
@@ -132,7 +141,7 @@ class App extends Component {
                       <RandomPick randomMovie={this.state.randomMovie} />
                     )}
                   />
-                  <h1>All Movies</h1>
+                  <h2>All Movies</h2>
                   <GenreFilter
                     movieData={this.state.movieData}
                     handleSelect={this.handleSelect}

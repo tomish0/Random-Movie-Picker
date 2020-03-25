@@ -7,7 +7,7 @@ class GenreFilter extends Component {
   render() {
     const genres = this.props.movieData.genres;
     return (
-      <div>
+      <div className="genre-filter-wrapper">
         <label htmlFor="genreFilter">Choose the genre:</label>
         <select
           id="genreFilter"

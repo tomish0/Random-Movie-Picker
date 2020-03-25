@@ -1,5 +1,4 @@
 .App {
-  padding: 10px;
   background-color: #0f1412;
   color: white;
   height: 100vh;
@@ -7,8 +6,12 @@
 }
 
 nav {
-  margin: 20px 50px;
-  padding: 30px;
+  padding: 50px 70px;
+  background-image: linear-gradient(
+    to bottom,
+    rgb(80, 112, 76) 20%,
+    #0f1412
+  );
 }
 
 .random-links {

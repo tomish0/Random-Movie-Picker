@@ -7,12 +7,13 @@ class GenreFilter extends Component {
   render() {
     const genres = this.props.movieData.genres;
     return (
-      <div>
+      <div className="genre-filter-wrapper">
         <label htmlFor="genreFilter">Choose the genre:</label>
         <select
           id="genreFilter"
           className="drop-down"
           onChange={this.props.handleSelect}
+          value={this.props.genreSelection}
         >
           <option value="All">All</option>
           {genres.map((genre, i) => {

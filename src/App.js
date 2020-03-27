@@ -5,6 +5,7 @@ import AllMovies from "./Components/AllMovies";
 import FavouriteMovies from "./Components/FavouriteMovies";
 import RandomFavPick from "./Components/RandomFavPick";
 import "./App.css";
+import "./Styles/AllMovies.css";
 import RandomPick from "./Components/RandomPick";
 
 class App extends Component {
@@ -14,8 +15,8 @@ class App extends Component {
     favourites: [],
     filteredFilms: [],
     randomMovie: "",
-    randomFavMovie: "",
-    genreSelection: ''
+    randomFavMovie: [],
+    genreSelection: ""
   };
 
   componentDidMount() {
@@ -47,7 +48,6 @@ class App extends Component {
 
   addFavMovie = favourites => {
     this.setState({ favourites });
-    console.log(this.state.genreSelection)
   };
 
   removeFavMovie = favourites => {
@@ -57,7 +57,7 @@ class App extends Component {
   findRandomMovie = () => {
     const movies = this.state.movieData.movies;
     let randomMovie = movies[Math.floor(Math.random() * movies.length)];
-    this.setState({ randomMovie: randomMovie.title });
+    this.setState({ randomMovie });
   };
 
   findRandomFavMovie = () => {
@@ -70,75 +70,94 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Link to="/">Home</Link>
-        <br></br>
-        <Link to="/random-pick-Movies" onClick={() => this.findRandomMovie()}>
-          Pick A Random Movie
-        </Link>
-
-        {this.state.favourites.length > 0 ? (
-          <div>
+        <nav>
+          <Link to="/" className="link home">
+            <h1>Home</h1>
+          </Link>
+          <div className="random-links">
+            <Link
+              to="/random-pick-movies"
+              onClick={() => this.findRandomMovie()}
+              className="link random-pick-movies"
+            >
+              <h1>Random Movie</h1>
+            </Link>
             {this.state.favourites.length > 1 ? (
               <Link
-                to="/random-pick-Fav-Movies"
+                to="/random-pick-fav-movies"
                 onClick={() => this.findRandomFavMovie()}
+                className="link random-pick-fav-movies"
               >
-                Pick A Random Movie From Your Favourites
+                <h1>Random Favourite</h1>
               </Link>
             ) : null}
-            <br></br>
-            <Route
-              exact
-              path="/random-pick-Movies"
-              component={() => (
-                <RandomPick randomMovie={this.state.randomMovie} />
-              )}
-            />
-            <Route
-              exact
-              path="/random-pick-Fav-Movies"
-              component={() => (
-                <RandomFavPick randomFavMovie={this.state.randomFavMovie} />
-              )}
-            />
-            <FavouriteMovies
-              favourites={this.state.favourites}
-              removeFavMovie={this.removeFavMovie}
-            />
-            <h1>All Movies</h1>
-            <GenreFilter
-              movieData={this.state.movieData}
-              handleSelect={this.handleSelect}
-            />
-            <AllMovies
-              movieData={this.state.movieData}
-              addFavMovie={this.addFavMovie}
-              favourites={this.state.favourites}
-              filteredFilms={this.state.filteredFilms}
-            />
           </div>
-        ) : this.state.haveMovies ? (
-          <div>
-            <Route
-              exact
-              path="/random-pick-Movies"
-              component={() => (
-                <RandomPick randomMovie={this.state.randomMovie} />
-              )}
-            />
-            <h1>All Movies</h1>
-            <GenreFilter
-              movieData={this.state.movieData}
-              handleSelect={this.handleSelect}
-            />
-            <AllMovies
-              movieData={this.state.movieData}
-              addFavMovie={this.addFavMovie}
-              favourites={this.state.favourites}
-              filteredFilms={this.state.filteredFilms}
-            />
-          </div>
-        ) : null}
+        </nav>
+        <Switch>
+          <Route
+            exact
+            path="/random-pick-Movies"
+            component={() => (
+              <RandomPick randomMovie={this.state.randomMovie} />
+            )}
+          />
+          <Route
+            exact
+            path="/random-pick-Fav-Movies"
+            component={() => (
+              <RandomFavPick randomFavMovie={this.state.randomFavMovie} />
+            )}
+          />
+          <Route
+            exact
+            path="/"
+            component={() =>
+              this.state.favourites.length > 0 ? (
+                <div>
+                  <br></br>
+                  <FavouriteMovies
+                    favourites={this.state.favourites}
+                    removeFavMovie={this.removeFavMovie}
+                  />
+                  <h2>All Movies</h2>
+                  <GenreFilter
+                    movieData={this.state.movieData}
+                    handleSelect={this.handleSelect}
+                    genreSelection={this.state.genreSelection}
+                  />
+                  <AllMovies
+                    movieData={this.state.movieData}
+                    addFavMovie={this.addFavMovie}
+                    favourites={this.state.favourites}
+                    filteredFilms={this.state.filteredFilms}
+                  />
+                </div>
+              ) : this.state.haveMovies ? (
+                <div>
+                  <Route
+                    exact
+                    path="/random-pick-Movies"
+                    component={() => (
+                      <RandomPick randomMovie={this.state.randomMovie} />
+                    )}
+                  />
+                  <h2>All Movies</h2>
+                  <GenreFilter
+                    movieData={this.state.movieData}
+                    handleSelect={this.handleSelect}
+                    genreSelection={this.state.genreSelection}
+                  />
+                  <AllMovies
+                    movieData={this.state.movieData}
+                    addFavMovie={this.addFavMovie}
+                    favourites={this.state.favourites}
+                    filteredFilms={this.state.filteredFilms}
+                  />
+                </div>
+              ) : null
+            }
+          />
+        </Switch>
       </div>
     );
   }

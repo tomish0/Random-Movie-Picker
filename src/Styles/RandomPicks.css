@@ -1,0 +1,40 @@
+.title {
+  text-align: center;
+  margin: 0 auto;
+  width: 300px;
+  font-size: 20px;
+  padding: 15px;
+}
+
+.title small {
+  font-size: 0.6em;
+  /* margin-left: 5px; */
+}
+
+.random-pick-main-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.details {
+  max-width: 400px;
+  padding: 5px 15px;
+}
+
+.director,
+.actor,
+.runtime,
+.genres,
+.plot {
+  margin-bottom: 10px;
+}
+
+.genres ul {
+  margin: 0;
+}
+
+.genres li {
+  padding: 5px;
+}

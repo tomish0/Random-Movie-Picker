@@ -13,7 +13,7 @@ class RandomPick extends Component {
           <small>({this.props.randomMovie.year})</small>
         </div>
         <div className="random-pick-main-wrapper">
-          <div>
+          <div className='img-container'>
             <img
               src={this.props.randomMovie.posterUrl}
               alt={this.props.randomMovie.title}

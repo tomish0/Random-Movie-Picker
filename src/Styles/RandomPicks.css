@@ -1,8 +1,8 @@
 .title {
   text-align: center;
-  margin: 0 auto;
-  width: 300px;
-  font-size: 20px;
+  margin: 40px auto;
+  width: max-content;
+  font-size: 65px;
   padding: 15px;
 }
 
@@ -14,13 +14,23 @@
 .random-pick-main-wrapper {
   display: flex;
   justify-content: space-evenly;
-  max-width: 800px;
+  max-width: 1750px;
   margin: 0 auto;
 }
 
+.img-container {
+  width: 800px;
+}
+
+img {
+  width: 100%;
+  font-size: 25px;
+}
+
 .details {
-  max-width: 400px;
+  max-width: 800px;
   padding: 5px 15px;
+  font-size: 50px;
 }
 
 .director,

@@ -4,7 +4,7 @@ import "../Styles/RandomPicks.css";
 class RandomPick extends Component {
   state = {};
   render() {
-    console.log(this.props);
+    // console.log(this.props);
 
     return (
       <div className="random-pick-main">

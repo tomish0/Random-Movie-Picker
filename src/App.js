@@ -48,16 +48,22 @@ class App extends Component {
 
   addFavMovie = favourites => {
     this.setState({ favourites });
+    localStorage.removeItem('favourites')
+    localStorage.setItem('favourites', JSON.stringify(favourites))
   };
 
   removeFavMovie = favourites => {
     this.setState({ favourites });
+    localStorage.removeItem('favourites')
+    localStorage.setItem('favourites', JSON.stringify(favourites))
   };
 
   findRandomMovie = () => {
     const movies = this.state.movieData.movies;
     let randomMovie = movies[Math.floor(Math.random() * movies.length)];
     this.setState({ randomMovie });
+    localStorage.removeItem('randomMovie')
+    localStorage.setItem('randomMovie', JSON.stringify(randomMovie))
   };
 
   findRandomFavMovie = () => {
@@ -65,9 +71,13 @@ class App extends Component {
       Math.floor(Math.random() * this.state.favourites.length)
     ];
     this.setState({ randomFavMovie });
+    localStorage.removeItem('randomFavMovie')
+    localStorage.setItem('randomFavMovie', JSON.stringify(randomFavMovie))
   };
 
   render() {
+    console.log(localStorage)
+    // localStorage.clear()
     return (
       <div className="App">
         <nav>
@@ -96,14 +106,14 @@ class App extends Component {
             exact
             path="/random-pick-Movies"
             component={() => (
-              <RandomPick randomMovie={this.state.randomMovie} />
+              <RandomPick randomMovie={JSON.parse(localStorage.getItem('randomMovie'))} />
             )}
           />
           <Route
             exact
             path="/random-pick-Fav-Movies"
             component={() => (
-              <RandomFavPick randomFavMovie={this.state.randomFavMovie} />
+              <RandomFavPick randomFavMovie={JSON.parse(localStorage.getItem('randomFavMovie'))}  />
             )}
           />
           <Route
@@ -114,7 +124,7 @@ class App extends Component {
                 <div>
                   <br></br>
                   <FavouriteMovies
-                    favourites={this.state.favourites}
+                    favourites={JSON.parse(localStorage.getItem('favourites'))} 
                     removeFavMovie={this.removeFavMovie}
                   />
                   <h2>All Movies</h2>
@@ -132,13 +142,6 @@ class App extends Component {
                 </div>
               ) : this.state.haveMovies ? (
                 <div>
-                  <Route
-                    exact
-                    path="/random-pick-Movies"
-                    component={() => (
-                      <RandomPick randomMovie={this.state.randomMovie} />
-                    )}
-                  />
                   <h2>All Movies</h2>
                   <GenreFilter
                     movieData={this.state.movieData}

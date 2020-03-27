@@ -6,7 +6,6 @@ class AllMovies extends Component {
   render() {
     const movies = this.props.movieData.movies;
     const filteredFilms = this.props.filteredFilms;
-    console.log(movies[1]);
     return (
       <div className="all-movies">
         {filteredFilms.length > 0 ? (

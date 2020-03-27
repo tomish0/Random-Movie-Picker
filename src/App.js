@@ -58,6 +58,8 @@ class App extends Component {
     const movies = this.state.movieData.movies;
     let randomMovie = movies[Math.floor(Math.random() * movies.length)];
     this.setState({ randomMovie });
+    localStorage.removeItem('randomMovie')
+    localStorage.setItem('randomMovie', JSON.stringify(randomMovie))
   };
 
   findRandomFavMovie = () => {
@@ -68,6 +70,8 @@ class App extends Component {
   };
 
   render() {
+    console.log(localStorage)
+    // localStorage.clear()
     return (
       <div className="App">
         <nav>
@@ -96,7 +100,7 @@ class App extends Component {
             exact
             path="/random-pick-Movies"
             component={() => (
-              <RandomPick randomMovie={this.state.randomMovie} />
+              <RandomPick randomMovie={JSON.parse(localStorage.getItem('randomMovie'))} />
             )}
           />
           <Route

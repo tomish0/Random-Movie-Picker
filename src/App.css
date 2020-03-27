@@ -6,27 +6,12 @@
 }
 
 nav {
-  padding: 50px 70px;
-  background-image: linear-gradient(
-    to bottom,
-    rgb(80, 112, 76) 20%,
-    #0f1412
-  );
-}
-
-.random-links {
-  display: flex;
-  justify-content: space-around;
-  margin-right: 200px;
-}
-
-.home {
-  float: left;
-  margin-right: 70px;
-}
-
-.random-pick-movies {
-  margin-right: 100px;
+  display: grid;
+  grid-template-columns: 33% 33% 34%;
+  grid-column-gap: 15px;
+  justify-items: center;
+  padding: 50px 40px;
+  background-image: linear-gradient(to bottom, rgb(80, 112, 76) 20%, #0f1412);
 }
 
 .link {

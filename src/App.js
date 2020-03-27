@@ -74,24 +74,22 @@ class App extends Component {
           <Link to="/" className="link home">
             <h1>Home</h1>
           </Link>
-          <div className="random-links">
+          <Link
+            to="/random-pick-movies"
+            onClick={() => this.findRandomMovie()}
+            className="link random-pick-movies"
+          >
+            <h1>Random Movie</h1>
+          </Link>
+          {this.state.favourites.length > 1 ? (
             <Link
-              to="/random-pick-movies"
-              onClick={() => this.findRandomMovie()}
-              className="link random-pick-movies"
+              to="/random-pick-fav-movies"
+              onClick={() => this.findRandomFavMovie()}
+              className="link random-pick-fav-movies"
             >
-              <h1>Random Movie</h1>
+              <h1>Random Favourite</h1>
             </Link>
-            {this.state.favourites.length > 1 ? (
-              <Link
-                to="/random-pick-fav-movies"
-                onClick={() => this.findRandomFavMovie()}
-                className="link random-pick-fav-movies"
-              >
-                <h1>Random Favourite</h1>
-              </Link>
-            ) : null}
-          </div>
+          ) : null}
         </nav>
         <Switch>
           <Route

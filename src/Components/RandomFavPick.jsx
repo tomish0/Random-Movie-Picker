@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import '../Styles/RandomPicks.css'
+import "../Styles/RandomPicks.css";
 
 class RandomFavPick extends Component {
   state = {};
@@ -13,7 +13,7 @@ class RandomFavPick extends Component {
           <small>({this.props.randomFavMovie.year})</small>
         </div>
         <div className="random-pick-main-wrapper">
-          <div>
+          <div className="img-container">
             <img
               src={this.props.randomFavMovie.posterUrl}
               alt={this.props.randomFavMovie.title}

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-
 class AllMovies extends Component {
   state = {};
   render() {
@@ -16,11 +15,7 @@ class AllMovies extends Component {
                   <strong>{filteredFilm.title}</strong> ({filteredFilm.year})
                   <button
                     onClick={() => {
-                      let favourites = [...this.props.favourites];
-                      if (!favourites.includes(filteredFilm)) {
-                        favourites.unshift(filteredFilm);
-                      }
-                      this.props.addFavMovie(favourites);
+                      this.props.addFavMovie(filteredFilm);
                     }}
                   >
                     Add to Favourites
@@ -37,11 +32,7 @@ class AllMovies extends Component {
                   <strong>{movie.title}</strong> ({movie.year})
                   <button
                     onClick={() => {
-                      let favourites = [...this.props.favourites];
-                      if (!favourites.includes(movie)) {
-                        favourites.unshift(movie);
-                      }
-                      this.props.addFavMovie(favourites);
+                      this.props.addFavMovie(movie);
                     }}
                   >
                     Add to Favourites

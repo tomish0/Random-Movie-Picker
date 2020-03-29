@@ -84,9 +84,11 @@ class App extends Component {
 
   render() {
     // localStorage.clear()
-    const movieData = JSON.parse(localStorage.getItem("movieData")) !== null ? JSON.parse(localStorage.getItem("movieData")) : this.state.movieData;
-    const favourites = JSON.parse(localStorage.getItem("favourites")) !== null ? JSON.parse(localStorage.getItem("favourites")) : this.state.favourites;
-    // console.log(favourites.length, favoxurites);
+    const movieData = JSON.parse(localStorage.getItem("movieData"))
+    // !== null ? JSON.parse(localStorage.getItem("movieData")) : this.state.movieData;
+    const favourites = JSON.parse(localStorage.getItem("favourites"))
+    // !== null ? JSON.parse(localStorage.getItem("favourites")) : this.state.favourites;
+    console.log(favourites.length, favourites, movieData);
     return (
       <div className="App">
         <nav>

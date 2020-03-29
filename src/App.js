@@ -20,6 +20,7 @@ class App extends Component {
   };
 
   componentDidMount() {
+    console.log("mounted");
     fetch(
       "https://raw.githubusercontent.com/wildcodeschoolparis/datas/master/movies.json"
     )
@@ -48,7 +49,10 @@ class App extends Component {
   };
 
   addFavMovie = movie => {
-    let favourites = JSON.parse(localStorage.getItem("favourites"));
+    let favourites =
+      JSON.parse(localStorage.getItem("favourites")) !== null
+        ? JSON.parse(localStorage.getItem("favourites"))
+        : this.state.favourites;
     let id = movie.id;
     if (favourites.some(movie => movie.id === id)) {
       alert(`${movie.title} is already a Favourite Movie!`);
@@ -61,7 +65,7 @@ class App extends Component {
 
   removeFavMovie = favourites => {
     this.setState({ favourites });
-    localStorage.removeItem("favourites");
+    // localStorage.removeItem("favourites");
     localStorage.setItem("favourites", JSON.stringify(favourites));
   };
 
@@ -83,10 +87,18 @@ class App extends Component {
   };
 
   render() {
-    // localStorage.clear()
-    const movieData = JSON.parse(localStorage.getItem("movieData"));
-    const favourites = JSON.parse(localStorage.getItem("favourites"));
-    console.log(favourites.length, favourites);
+    // localStorage.clear();
+    const favourites =
+      JSON.parse(localStorage.getItem("favourites")) !== null
+        ? JSON.parse(localStorage.getItem("favourites"))
+        : this.state.favourites;
+    const movieData = 
+    JSON.parse(localStorage.getItem("movieData")) !== null
+    ? JSON.parse(localStorage.getItem("movieData"))
+    : this.state.movieData;
+      
+    console.log(favourites, favourites.length, this.state.favourites)
+    console.log(this.state.movieData, JSON.parse(localStorage.getItem("movieData")))
     return (
       <div className="App">
         <nav>
@@ -137,7 +149,6 @@ class App extends Component {
             component={() =>
               favourites.length > 0 ? (
                 <div>
-                  <br></br>
                   <FavouriteMovies
                     favourites={favourites}
                     removeFavMovie={this.removeFavMovie}

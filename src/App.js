@@ -9,15 +9,29 @@ import "./Styles/AllMovies.css";
 import RandomPick from "./Components/RandomPick";
 
 class App extends Component {
-  state = {
-    movieData: [],
-    haveMovies: false,
-    favourites: [],
-    filteredFilms: [],
-    randomMovie: "",
-    randomFavMovie: [],
-    genreSelection: ""
-  };
+  // state = {
+  //   movieData: [],
+  //   haveMovies: false,
+  //   favourites: [],
+  //   filteredFilms: [],
+  //   randomMovie: "",
+  //   randomFavMovie: [],
+  //   genreSelection: ""
+  // };
+
+  constructor(props) {
+    super(props);
+    // Don't call this.setState() here!
+    this.state = {
+      movieData: [],
+      haveMovies: false,
+      favourites: [],
+      filteredFilms: [],
+      randomMovie: "",
+      randomFavMovie: [],
+      genreSelection: ""
+    };
+  }
 
   componentDidMount() {
     console.log("mounted");
@@ -92,13 +106,16 @@ class App extends Component {
       JSON.parse(localStorage.getItem("favourites")) !== null
         ? JSON.parse(localStorage.getItem("favourites"))
         : this.state.favourites;
-    const movieData = 
-    JSON.parse(localStorage.getItem("movieData")) !== null
-    ? JSON.parse(localStorage.getItem("movieData"))
-    : this.state.movieData;
-      
-    console.log(favourites, favourites.length, this.state.favourites)
-    console.log(this.state.movieData, JSON.parse(localStorage.getItem("movieData")))
+    const movieData =
+      JSON.parse(localStorage.getItem("movieData")) !== null
+        ? JSON.parse(localStorage.getItem("movieData"))
+        : this.state.movieData;
+
+    console.log(favourites, favourites.length, this.state.favourites);
+    console.log(
+      this.state.movieData,
+      JSON.parse(localStorage.getItem("movieData"))
+    );
     return (
       <div className="App">
         <nav>

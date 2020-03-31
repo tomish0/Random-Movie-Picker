@@ -9,18 +9,28 @@ import "./Styles/AllMovies.css";
 import RandomPick from "./Components/RandomPick";
 
 class App extends Component {
-  state = {
-    movieData: [],
-    haveMovies: false,
-    favourites: [],
-    filteredFilms: [],
-    randomMovie: "",
-    randomFavMovie: [],
-    genreSelection: ""
-  };
+  constructor(props) {
+    super(props);
+    this.movieData =
+      JSON.parse(localStorage.getItem("movieData")) !== null
+        ? JSON.parse(localStorage.getItem("movieData"))
+        : [];
+    this.favourites =
+      JSON.parse(localStorage.getItem("favourites")) !== null
+        ? JSON.parse(localStorage.getItem("favourites"))
+        : [];
+    this.state = {
+      movieData: this.movieData,
+      haveMovies: false,
+      favourites: this.favourites,
+      filteredFilms: [],
+      randomMovie: "",
+      randomFavMovie: [],
+      genreSelection: ""
+    };
+  }
 
   componentDidMount() {
-    console.log("mounted");
     fetch(
       "https://raw.githubusercontent.com/wildcodeschoolparis/datas/master/movies.json"
     )
@@ -28,8 +38,9 @@ class App extends Component {
         return response.json();
       })
       .then(data => {
-        this.setState({ movieData: data, haveMovies: true });
         localStorage.setItem("movieData", JSON.stringify(data));
+        const movieData = JSON.parse(localStorage.getItem("movieData"));
+        this.setState({ movieData, haveMovies: true });
       })
       .catch(err => {
         console.log(err);
@@ -49,12 +60,9 @@ class App extends Component {
   };
 
   addFavMovie = movie => {
-    let favourites =
-      JSON.parse(localStorage.getItem("favourites")) !== null
-        ? JSON.parse(localStorage.getItem("favourites"))
-        : this.state.favourites;
+    let favourites = this.state.favourites;
     let id = movie.id;
-    if (favourites.some(movie => movie.id === id)) {
+    if (this.state.favourites.some(movie => movie.id === id)) {
       alert(`${movie.title} is already a Favourite Movie!`);
     } else {
       favourites.unshift(movie);
@@ -65,22 +73,19 @@ class App extends Component {
 
   removeFavMovie = favourites => {
     this.setState({ favourites });
-    // localStorage.removeItem("favourites");
     localStorage.setItem("favourites", JSON.stringify(favourites));
   };
 
   findRandomMovie = () => {
-    const movies = JSON.parse(localStorage.getItem("movieData")).movies;
+    const movies = this.state.movieData.movies;
     let randomMovie = movies[Math.floor(Math.random() * movies.length)];
     localStorage.removeItem("randomMovie");
     localStorage.setItem("randomMovie", JSON.stringify(randomMovie));
   };
 
   findRandomFavMovie = () => {
-    let randomFavMovie = JSON.parse(localStorage.getItem("favourites"))[
-      Math.floor(
-        Math.random() * JSON.parse(localStorage.getItem("favourites")).length
-      )
+    let randomFavMovie = this.state.favourites[
+      Math.floor(Math.random() * this.state.favourites.length)
     ];
     localStorage.removeItem("randomFavMovie");
     localStorage.setItem("randomFavMovie", JSON.stringify(randomFavMovie));
@@ -88,17 +93,6 @@ class App extends Component {
 
   render() {
     // localStorage.clear();
-    const favourites =
-      JSON.parse(localStorage.getItem("favourites")) !== null
-        ? JSON.parse(localStorage.getItem("favourites"))
-        : this.state.favourites;
-    const movieData = 
-    JSON.parse(localStorage.getItem("movieData")) !== null
-    ? JSON.parse(localStorage.getItem("movieData"))
-    : this.state.movieData;
-      
-    console.log(favourites, favourites.length, this.state.favourites)
-    console.log(this.state.movieData, JSON.parse(localStorage.getItem("movieData")))
     return (
       <div className="App">
         <nav>
@@ -112,7 +106,7 @@ class App extends Component {
           >
             <h1>Random Movie</h1>
           </Link>
-          {favourites.length > 1 ? (
+          {this.state.favourites.length > 1 ? (
             <Link
               to="/random-pick-fav-movies"
               onClick={() => this.findRandomFavMovie()}
@@ -147,22 +141,22 @@ class App extends Component {
             exact
             path="/"
             component={() =>
-              favourites.length > 0 ? (
+              this.state.favourites.length > 0 ? (
                 <div>
                   <FavouriteMovies
-                    favourites={favourites}
+                    favourites={this.state.favourites}
                     removeFavMovie={this.removeFavMovie}
                   />
                   <h2>All Movies</h2>
                   <GenreFilter
-                    movieData={movieData}
+                    movieData={this.state.movieData}
                     handleSelect={this.handleSelect}
                     genreSelection={this.state.genreSelection}
                   />
                   <AllMovies
-                    movieData={movieData}
+                    movieData={this.state.movieData}
                     addFavMovie={this.addFavMovie}
-                    favourites={favourites}
+                    favourites={this.state.favourites}
                     filteredFilms={this.state.filteredFilms}
                   />
                 </div>
@@ -170,14 +164,14 @@ class App extends Component {
                 <div>
                   <h2>All Movies</h2>
                   <GenreFilter
-                    movieData={movieData}
+                    movieData={this.state.movieData}
                     handleSelect={this.handleSelect}
                     genreSelection={this.state.genreSelection}
                   />
                   <AllMovies
-                    movieData={movieData}
+                    movieData={this.state.movieData}
                     addFavMovie={this.addFavMovie}
-                    favourites={favourites}
+                    favourites={this.state.favourites}
                     filteredFilms={this.state.filteredFilms}
                   />
                 </div>

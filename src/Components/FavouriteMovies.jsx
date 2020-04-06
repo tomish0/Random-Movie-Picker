@@ -17,7 +17,7 @@ class FavouriteMovies extends Component {
                     onClick={() => {
                       let favourites = [...this.props.favourites];
                       favourites.splice([i], 1);
-                      this.props.removeFavMovie(favourites);
+                      this.props.removeFavMovie(favourites, favFilm);
                     }}
                   >
                     Remove

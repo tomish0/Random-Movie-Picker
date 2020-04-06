@@ -3,7 +3,7 @@ import React, { Component } from "react";
 class AllMovies extends Component {
   state = {};
   render() {
-    const movies = this.props.movieData.movies;
+    const allMovies = this.props.allMovies;
     const filteredFilms = this.props.filteredFilms;
     return (
       <div className="all-movies">
@@ -26,7 +26,7 @@ class AllMovies extends Component {
           </div>
         ) : (
           <div className="movie-wrapper">
-            {movies.map((movie, i) => {
+            {allMovies.map((movie, i) => {
               return (
                 <div className="each-movie" key={i}>
                   <strong>{movie.title}</strong> ({movie.year})

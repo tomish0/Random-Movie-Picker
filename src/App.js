@@ -11,22 +11,27 @@ import RandomPick from "./Components/RandomPick";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.movieData =
-      JSON.parse(localStorage.getItem("movieData")) !== null
-        ? JSON.parse(localStorage.getItem("movieData"))
+    this.allMovies =
+      JSON.parse(localStorage.getItem("allMovies")) !== null
+        ? JSON.parse(localStorage.getItem("allMovies"))
+        : [];
+    this.genres =
+      JSON.parse(localStorage.getItem("genres")) !== null
+        ? JSON.parse(localStorage.getItem("genres"))
         : [];
     this.favourites =
       JSON.parse(localStorage.getItem("favourites")) !== null
         ? JSON.parse(localStorage.getItem("favourites"))
         : [];
     this.state = {
-      movieData: this.movieData,
+      allMovies: this.allMovies,
+      genres: this.genres,
       haveMovies: false,
       favourites: this.favourites,
       filteredFilms: [],
       randomMovie: "",
       randomFavMovie: [],
-      genreSelection: ""
+      genreSelection: "",
     };
   }
 
@@ -34,50 +39,70 @@ class App extends Component {
     fetch(
       "https://raw.githubusercontent.com/wildcodeschoolparis/datas/master/movies.json"
     )
-      .then(response => {
+      .then((response) => {
         return response.json();
       })
-      .then(data => {
-        localStorage.setItem("movieData", JSON.stringify(data));
-        const movieData = JSON.parse(localStorage.getItem("movieData"));
-        this.setState({ movieData, haveMovies: true });
+      .then((data) => {
+        if (JSON.parse(localStorage.getItem("allMovies")) === null) {
+          localStorage.setItem("allMovies", JSON.stringify(data.movies));
+          localStorage.setItem("genres", JSON.stringify(data.genres));
+        }
+        const allMovies = JSON.parse(localStorage.getItem("allMovies"));
+        const genres = JSON.parse(localStorage.getItem("genres"));
+        this.setState({ allMovies, genres, haveMovies: true });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }
 
-  handleSelect = event => {
-    const genreSelection = event.target.value;
-    console.log(genreSelection);
+  handleSelect = (event) => {
+    let genreSelection = event.target.value;
     const filteredFilms = [];
-    this.state.movieData.movies.filter(movie => {
+    let allMovies = this.state.allMovies;
+    allMovies.filter((movie) => {
       if (movie.genres.includes(genreSelection)) {
         filteredFilms.unshift(movie);
       }
     });
     this.setState({ filteredFilms, genreSelection });
-  };
-
-  addFavMovie = movie => {
-    let favourites = this.state.favourites;
-    let id = movie.id;
-    if (this.state.favourites.some(movie => movie.id === id)) {
-      alert(`${movie.title} is already a Favourite Movie!`);
-    } else {
-      favourites.unshift(movie);
+    if (genreSelection === "All") {
+      this.setState({
+        filteredFilms: JSON.parse(localStorage.getItem("allMovies")),
+      });
     }
-    this.setState({ favourites });
-    localStorage.setItem("favourites", JSON.stringify(favourites));
   };
 
-  removeFavMovie = favourites => {
-    this.setState({ favourites });
+  addFavMovie = (movie) => {
+    const favourites = this.state.favourites;
+    const allMovies = this.state.allMovies;
+    const filteredFilms = this.state.filteredFilms;
+    let allMovieIndex = allMovies.indexOf(movie);
+    let filteredFilmsIndex = filteredFilms.indexOf(movie);
+
+    favourites.unshift(movie);
+    allMovies.splice(allMovieIndex, 1);
+    filteredFilms.splice(filteredFilmsIndex, 1);
+
+    this.setState({ favourites, allMovies });
     localStorage.setItem("favourites", JSON.stringify(favourites));
+    localStorage.setItem("allMovies", JSON.stringify(allMovies));
+  };
+
+  removeFavMovie = (favourites, favFilm) => {
+    const allMovies = this.state.allMovies;
+    const filteredFilms = this.state.filteredFilms;
+    if (this.state.genreSelection !== "") {
+      filteredFilms.push(favFilm);
+    }
+    allMovies.push(favFilm);
+    this.setState({ favourites, allMovies, filteredFilms });
+    localStorage.setItem("favourites", JSON.stringify(favourites));
+    localStorage.setItem("allMovies", JSON.stringify(allMovies));
   };
 
   findRandomMovie = () => {
-    const movies = this.state.movieData.movies;
+    const movies = this.state.allMovies;
     let randomMovie = movies[Math.floor(Math.random() * movies.length)];
     localStorage.removeItem("randomMovie");
     localStorage.setItem("randomMovie", JSON.stringify(randomMovie));
@@ -93,6 +118,7 @@ class App extends Component {
 
   render() {
     // localStorage.clear();
+    console.log(this.state.genreSelection);
     return (
       <div className="App">
         <nav>
@@ -149,12 +175,12 @@ class App extends Component {
                   />
                   <h2>All Movies</h2>
                   <GenreFilter
-                    movieData={this.state.movieData}
+                    genres={this.state.genres}
                     handleSelect={this.handleSelect}
                     genreSelection={this.state.genreSelection}
                   />
                   <AllMovies
-                    movieData={this.state.movieData}
+                    allMovies={this.state.allMovies}
                     addFavMovie={this.addFavMovie}
                     favourites={this.state.favourites}
                     filteredFilms={this.state.filteredFilms}
@@ -164,12 +190,12 @@ class App extends Component {
                 <div>
                   <h2>All Movies</h2>
                   <GenreFilter
-                    movieData={this.state.movieData}
+                    genres={this.state.genres}
                     handleSelect={this.handleSelect}
                     genreSelection={this.state.genreSelection}
                   />
                   <AllMovies
-                    movieData={this.state.movieData}
+                    allMovies={this.state.allMovies}
                     addFavMovie={this.addFavMovie}
                     favourites={this.state.favourites}
                     filteredFilms={this.state.filteredFilms}

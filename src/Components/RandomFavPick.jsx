@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import "../Styles/RandomPicks.css";
 
 class RandomFavPick extends Component {
-  state = {};
   render() {
-    console.log(this.props);
-
     return (
       <div className="random-pick-main">
         <div className="title">

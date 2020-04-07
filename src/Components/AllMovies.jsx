@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 class AllMovies extends Component {
-  state = {};
   render() {
     const allMovies = this.props.allMovies;
     const filteredFilms = this.props.filteredFilms;

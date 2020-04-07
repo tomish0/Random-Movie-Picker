@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import "../Styles/GenreFilter.css";
 
 class GenreFilter extends Component {
-  state = {};
-
   render() {
-    const genres = this.props.movieData.genres;
+    const genres = this.props.genres;
     return (
       <div className="genre-filter-wrapper">
         <label htmlFor="genreFilter">Choose the genre:</label>

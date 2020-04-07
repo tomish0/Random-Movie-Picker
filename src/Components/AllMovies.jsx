@@ -3,11 +3,12 @@ import React, { Component } from "react";
 class AllMovies extends Component {
   state = {};
   render() {
-    const movies = this.props.movieData.movies;
+    const allMovies = this.props.allMovies;
     const filteredFilms = this.props.filteredFilms;
+    const genreSelection = this.props.genreSelection
     return (
       <div className="all-movies">
-        {filteredFilms.length > 0 ? (
+        {filteredFilms.length > 0 && genreSelection !== 'All' ? (
           <div className="movie-wrapper">
             {filteredFilms.map((filteredFilm, i) => {
               return (
@@ -26,7 +27,7 @@ class AllMovies extends Component {
           </div>
         ) : (
           <div className="movie-wrapper">
-            {movies.map((movie, i) => {
+            {allMovies.map((movie, i) => {
               return (
                 <div className="each-movie" key={i}>
                   <strong>{movie.title}</strong> ({movie.year})

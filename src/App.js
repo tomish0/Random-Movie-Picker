@@ -66,11 +66,6 @@ class App extends Component {
       }
     });
     this.setState({ filteredFilms, genreSelection });
-    if (genreSelection === "All") {
-      this.setState({
-        filteredFilms: JSON.parse(localStorage.getItem("allMovies")),
-      });
-    }
   };
 
   addFavMovie = (movie) => {
@@ -92,7 +87,11 @@ class App extends Component {
   removeFavMovie = (favourites, favFilm) => {
     const allMovies = this.state.allMovies;
     const filteredFilms = this.state.filteredFilms;
-    if (this.state.genreSelection !== "") {
+    const genreSelection = this.state.genreSelection
+    if (
+      genreSelection !== "" &&
+      favFilm.genres.includes(genreSelection)
+    ) {
       filteredFilms.push(favFilm);
     }
     allMovies.push(favFilm);
@@ -184,6 +183,7 @@ class App extends Component {
                     addFavMovie={this.addFavMovie}
                     favourites={this.state.favourites}
                     filteredFilms={this.state.filteredFilms}
+                    genreSelection={this.state.genreSelection}
                   />
                 </div>
               ) : this.state.haveMovies ? (
@@ -199,6 +199,7 @@ class App extends Component {
                     addFavMovie={this.addFavMovie}
                     favourites={this.state.favourites}
                     filteredFilms={this.state.filteredFilms}
+                    genreSelection={this.state.genreSelection}
                   />
                 </div>
               ) : null

@@ -9,6 +9,7 @@ import "./Styles/AllMovies.css";
 import RandomPick from "./Components/RandomPick";
 
 class App extends Component {
+  // Constructor used to either start the app with the local storage data or empty arrays
   constructor(props) {
     super(props);
     this.allMovies =
@@ -24,18 +25,23 @@ class App extends Component {
         ? JSON.parse(localStorage.getItem("favourites"))
         : [];
     this.state = {
-      allMovies: this.allMovies,
-      genres: this.genres,
-      haveMovies: false,
-      favourites: this.favourites,
-      filteredFilms: [],
-      randomMovie: "",
-      randomFavMovie: [],
-      genreSelection: "",
+      allMovies: this.allMovies, // array of all the movies accessed from the api
+      genres: this.genres, // array of all the genres accessed from the api
+      haveMovies: false, // boolean to allow componentDidMount to be called before showing content
+      favourites: this.favourites, // array of the chosen favourite movies
+      filteredFilms: [], // array of movies after filter occurs
+      randomMovie: {}, // single movie object chosen randomly from allMovies array
+      randomFavMovie: {}, // single movie object chosen randomly from favourites array
+      genreSelection: "", // the genre selected upon filter
+      noMoreFilteredFilms: false,
     };
   }
 
   componentDidMount() {
+    // once received movie data from api check if local storage already has the data
+    // if no, then put api data into local storage
+    // then, get data from local storage and put into the state
+    // also set boolean haveMovies to true so content can render in render()
     fetch(
       "https://raw.githubusercontent.com/wildcodeschoolparis/datas/master/movies.json"
     )
@@ -57,6 +63,9 @@ class App extends Component {
   }
 
   handleSelect = (event) => {
+    // handling onChange event of genreSelection in GenreFilter.jsx
+    // allMovies is filtered to produce only movies with genres that include the selection
+    // filtered movies are put into this.state.filteredFilms array
     let genreSelection = event.target.value;
     const filteredFilms = [];
     let allMovies = this.state.allMovies;
@@ -69,6 +78,9 @@ class App extends Component {
   };
 
   addFavMovie = (movie) => {
+    // movie object received from allMovies button onCLick
+    // find index of movie in allMovies & filteredFilms to splice from respective arrays upon adding
+    // put new movie into favourites array
     const favourites = this.state.favourites;
     const allMovies = this.state.allMovies;
     const filteredFilms = this.state.filteredFilms;
@@ -85,13 +97,15 @@ class App extends Component {
   };
 
   removeFavMovie = (favourites, favFilm) => {
+    // if the genre isn't empty (when the app starts the filter starts on 'All', which isn't a genre from API)
+    // and the favFilm's genres does not include the genreSelection
+    // then put the favFilm into filteredFilms array
+    // conditonal solves issue of removing from favourites and showing instantaneously if in a filter
+    // put the favFilm back into the allMovies array
     const allMovies = this.state.allMovies;
     const filteredFilms = this.state.filteredFilms;
-    const genreSelection = this.state.genreSelection
-    if (
-      genreSelection !== "" &&
-      favFilm.genres.includes(genreSelection)
-    ) {
+    const genreSelection = this.state.genreSelection;
+    if (genreSelection !== "" && favFilm.genres.includes(genreSelection)) {
       filteredFilms.push(favFilm);
     }
     allMovies.push(favFilm);
@@ -101,6 +115,7 @@ class App extends Component {
   };
 
   findRandomMovie = () => {
+    // find a random movie from allMovies array
     const movies = this.state.allMovies;
     let randomMovie = movies[Math.floor(Math.random() * movies.length)];
     localStorage.removeItem("randomMovie");
@@ -108,6 +123,7 @@ class App extends Component {
   };
 
   findRandomFavMovie = () => {
+    // find a random movie from favourites array
     let randomFavMovie = this.state.favourites[
       Math.floor(Math.random() * this.state.favourites.length)
     ];
@@ -116,11 +132,10 @@ class App extends Component {
   };
 
   render() {
-    // localStorage.clear();
-    console.log(this.state.genreSelection);
     return (
       <div className="App">
         <nav>
+          {/* Use of browser router to navigate between three routes with 3 links */}
           <Link to="/" className="link home">
             <h1>Home</h1>
           </Link>
@@ -131,6 +146,7 @@ class App extends Component {
           >
             <h1>Random Movie</h1>
           </Link>
+          {/* only if there is more than 1 favourite movie can you randomly find */}
           {this.state.favourites.length > 1 ? (
             <Link
               to="/random-pick-fav-movies"
@@ -166,6 +182,7 @@ class App extends Component {
             exact
             path="/"
             component={() =>
+              // if there are any favourite movies then FavouriteMovies comp is shown
               this.state.favourites.length > 0 ? (
                 <div>
                   <FavouriteMovies
@@ -186,7 +203,8 @@ class App extends Component {
                     genreSelection={this.state.genreSelection}
                   />
                 </div>
-              ) : this.state.haveMovies ? (
+              ) : // if true (componentDidMount has been called & we have data), then comps are shown
+              this.state.haveMovies ? (
                 <div>
                   <h2>All Movies</h2>
                   <GenreFilter

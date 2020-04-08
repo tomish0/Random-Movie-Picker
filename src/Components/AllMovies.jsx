@@ -4,10 +4,10 @@ class AllMovies extends Component {
   render() {
     const allMovies = this.props.allMovies;
     const filteredFilms = this.props.filteredFilms;
-    const genreSelection = this.props.genreSelection
+    const genreSelection = this.props.genreSelection;
     return (
       <div className="all-movies">
-        {filteredFilms.length > 0 && genreSelection !== 'All' ? (
+        {filteredFilms.length > 0 && genreSelection !== "All" ? (
           <div className="movie-wrapper">
             {filteredFilms.map((filteredFilm, i) => {
               return (
@@ -23,6 +23,12 @@ class AllMovies extends Component {
                 </div>
               );
             })}
+          </div>
+        ) : filteredFilms.length === 0 &&
+          genreSelection !== "All" &&
+          genreSelection !== "" ? (
+          <div className="filter-empty-message">
+            {genreSelection} Movies are your Favourites!
           </div>
         ) : (
           <div className="movie-wrapper">

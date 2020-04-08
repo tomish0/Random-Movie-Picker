@@ -33,7 +33,7 @@ class App extends Component {
       randomMovie: {}, // single movie object chosen randomly from allMovies array
       randomFavMovie: {}, // single movie object chosen randomly from favourites array
       genreSelection: "", // the genre selected upon filter
-      noMoreFilteredFilms: false 
+      noMoreFilteredFilms: false,
     };
   }
 
@@ -86,11 +86,6 @@ class App extends Component {
     const filteredFilms = this.state.filteredFilms;
     let allMovieIndex = allMovies.indexOf(movie);
     let filteredFilmsIndex = filteredFilms.indexOf(movie);
-    
-    if (filteredFilms.length === 0) {
-      this.setState({ noMoreFilteredFilms: true });
-    }
-    console.log(filteredFilms.length)
 
     favourites.unshift(movie);
     allMovies.splice(allMovieIndex, 1);

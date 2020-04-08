@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 
 class FavouriteMovies extends Component {
-  state = {};
-
   render() {
+    // show all favourite movies 
+    // remove button on each favFilm that removes it from array at specific index, i
+    // calls removeFavMovie in App, sending up the new current state of favourites
+    // and the favFilm that is being removed 
     const favourites = this.props.favourites;
     return (
         <div className="favourites-container">
@@ -15,7 +17,6 @@ class FavouriteMovies extends Component {
                   <strong>{favFilm.title}</strong> ({favFilm.year})
                   <button
                     onClick={() => {
-                      let favourites = [...this.props.favourites];
                       favourites.splice([i], 1);
                       this.props.removeFavMovie(favourites, favFilm);
                     }}

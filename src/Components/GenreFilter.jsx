@@ -3,6 +3,8 @@ import "../Styles/GenreFilter.css";
 
 class GenreFilter extends Component {
   render() {
+    // select list to create drop down of genres
+    // onChange calls handleSelect function in App 
     const genres = this.props.genres;
     return (
       <div className="genre-filter-wrapper">

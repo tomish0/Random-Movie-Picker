@@ -4,9 +4,10 @@ import GenreFilter from "./Components/GenreFilter";
 import AllMovies from "./Components/AllMovies";
 import FavouriteMovies from "./Components/FavouriteMovies";
 import RandomFavPick from "./Components/RandomFavPick";
+import RandomPick from "./Components/RandomPick";
 import "./App.css";
 import "./Styles/AllMovies.css";
-import RandomPick from "./Components/RandomPick";
+
 
 class App extends Component {
   // Constructor used to either start the app with the local storage data or empty arrays

@@ -2,37 +2,36 @@ import React, { Component } from "react";
 import "../Styles/RandomPicks.css";
 
 class RandomPick extends Component {
-  state = {};
   render() {
-    // console.log(this.props);
-
+    // show the randomly chosen movie once link has been clicked
+    const randomMovie = this.props.randomMovie;
     return (
       <div className="random-pick-main">
         <div className="title">
-          <strong>{this.props.randomMovie.title}</strong>{" "}
-          <small>({this.props.randomMovie.year})</small>
+          <strong>{randomMovie.title}</strong>{" "}
+          <small>({randomMovie.year})</small>
         </div>
         <div className="random-pick-main-wrapper">
           <div className='img-container'>
             <img
-              src={this.props.randomMovie.posterUrl}
-              alt={this.props.randomMovie.title}
+              src={randomMovie.posterUrl}
+              alt={randomMovie.title}
             ></img>
           </div>
           <div className="details">
             <div className="director">
-              <strong>Director:</strong> {this.props.randomMovie.director}
+              <strong>Director:</strong> {randomMovie.director}
             </div>
             {/* Actors are in a string, not array, can't map */}
             <div className="actor">
-              <strong>Actors:</strong> {this.props.randomMovie.actors}
+              <strong>Actors:</strong> {randomMovie.actors}
             </div>
             <div className="runtime">
-              <strong>Runtime:</strong> {this.props.randomMovie.runtime} mins
+              <strong>Runtime:</strong> {randomMovie.runtime} mins
             </div>
             <div className="genres">
               <strong>Genres:</strong>
-              {this.props.randomMovie.genres.map((genre, i) => {
+              {randomMovie.genres.map((genre, i) => {
                 return (
                   <ul key={i}>
                     <li>{genre}</li>
@@ -41,7 +40,7 @@ class RandomPick extends Component {
               })}
             </div>
             <div className="plot">
-              <strong>Plot:</strong> {this.props.randomMovie.plot}
+              <strong>Plot:</strong> {randomMovie.plot}
             </div>
           </div>
         </div>

@@ -8,7 +8,6 @@ import RandomPick from "./Components/RandomPick";
 import "./App.css";
 import "./Styles/AllMovies.css";
 
-
 class App extends Component {
   // Constructor used to either start the app with the local storage data or empty arrays
   constructor(props) {
@@ -69,8 +68,7 @@ class App extends Component {
     // filtered movies are put into this.state.filteredFilms array
     let genreSelection = event.target.value;
     const filteredFilms = [];
-    let allMovies = this.state.allMovies;
-    allMovies.filter((movie) => {
+    this.state.allMovies.filter((movie) => {
       if (movie.genres.includes(genreSelection)) {
         filteredFilms.unshift(movie);
       }
@@ -82,9 +80,7 @@ class App extends Component {
     // movie object received from allMovies button onCLick
     // find index of movie in allMovies & filteredFilms to splice from respective arrays upon adding
     // put new movie into favourites array
-    const favourites = this.state.favourites;
-    const allMovies = this.state.allMovies;
-    const filteredFilms = this.state.filteredFilms;
+    const { allMovies, favourites, filteredFilms } = this.state;
     let allMovieIndex = allMovies.indexOf(movie);
     let filteredFilmsIndex = filteredFilms.indexOf(movie);
 
@@ -103,9 +99,7 @@ class App extends Component {
     // then put the favFilm into filteredFilms array
     // conditonal solves issue of removing from favourites and showing instantaneously if in a filter
     // put the favFilm back into the allMovies array
-    const allMovies = this.state.allMovies;
-    const filteredFilms = this.state.filteredFilms;
-    const genreSelection = this.state.genreSelection;
+    const { allMovies, filteredFilms, genreSelection } = this.state;
     if (genreSelection !== "" && favFilm.genres.includes(genreSelection)) {
       filteredFilms.push(favFilm);
     }
@@ -117,8 +111,9 @@ class App extends Component {
 
   findRandomMovie = () => {
     // find a random movie from allMovies array
-    const movies = this.state.allMovies;
-    let randomMovie = movies[Math.floor(Math.random() * movies.length)];
+    let randomMovie = this.state.allMovies[
+      Math.floor(Math.random() * this.state.allMovies.length)
+    ];
     localStorage.removeItem("randomMovie");
     localStorage.setItem("randomMovie", JSON.stringify(randomMovie));
   };

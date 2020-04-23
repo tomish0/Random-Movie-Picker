@@ -13,14 +13,6 @@
   .each-movie {
     font-size: 28px;
   }
-  .each-movie strong {
-    font-size: 35px;
-  }
-  .each-movie button {
-    height: 80px;
-    width: 200px;
-    font-size: 25px;
-  }
   .random-pick-main {
     font-size: 70px;
   }
@@ -36,9 +28,6 @@
   .each-movie {
     font-size: 26px;
   }
-  .each-movie strong {
-    font-size: 32px;
-  }
 }
 
 @media (max-width: 1340px) {
@@ -51,24 +40,11 @@
   .each-movie {
     font-size: 24px;
   }
-  .each-movie strong {
-    font-size: 30px;
-  }
-  .each-movie button {
-    height: 70px;
-    width: 180px;
-    font-size: 23px;
-  }
   .filter-empty-message {
     font-size: 40px;
   }
   .genre-filter-wrapper {
     font-size: 35px;
-  }
-  .drop-down {
-    height: 75px;
-    width: 200px;
-    font-size: 30px;
   }
   .random-pick-main {
     font-size: 50px;
@@ -94,14 +70,6 @@
   .each-movie {
     font-size: 22px;
   }
-  .each-movie strong {
-    font-size: 28px;
-  }
-  .each-movie button {
-    height: 65px;
-    width: 170px;
-    font-size: 22px;
-  }
   .random-pick-main {
     font-size: 40px;
   }
@@ -121,25 +89,12 @@
   .each-movie {
     font-size: 21px;
   }
-  .each-movie strong {
-    font-size: 26px;
-  }
-  .each-movie button {
-    height: 60px;
-    width: 165px;
-    font-size: 21px;
-  }
   .filter-empty-message {
     font-size: 25px;
     margin: 30px;
   }
   .genre-filter-wrapper {
     font-size: 30px;
-  }
-  .drop-down {
-    height: 70px;
-    width: 180px;
-    font-size: 25px;
   }
 }
 
@@ -156,25 +111,14 @@
   .each-movie {
     font-size: 20px;
   }
-  .each-movie strong {
-    font-size: 25px;
-  }
-  .each-movie button {
-    height: 60px;
-    width: 160px;
-    font-size: 20px;
+  .genre-filter-wrapper {
+    font-size: 28px;
   }
   .random-pick-main {
     font-size: 30px;
   }
   .title {
     margin: 20px auto;
-  }
-  .title small {
-    font-size: 0.65em;
-  }
-  .details {
-    font-size: 0.7em;
   }
   .img-container {
     width: 600px;
@@ -202,13 +146,8 @@
   .each-movie {
     font-size: 19px;
   }
-  .each-movie strong {
-    font-size: 23px;
-  }
-  .each-movie button {
-    height: 60px;
-    width: 160px;
-    font-size: 19.5px;
+  .genre-filter-wrapper {
+    font-size: 25px;
   }
   .random-pick-main {
     font-size: 25px;
@@ -227,11 +166,6 @@
   }
   .genre-filter-wrapper {
     font-size: 22px;
-  }
-  .drop-down {
-    height: 60px;
-    width: 150px;
-    font-size: 20px;
   }
   .random-pick-main {
     font-size: 20px;
@@ -265,22 +199,8 @@
   .each-movie {
     font-size: 17px;
   }
-  .each-movie strong {
-    font-size: 20px;
-  }
-  .each-movie button {
-    height: 45px;
-    width: 155px;
-    font-size: 17px;
-  }
   .genre-filter-wrapper {
     font-size: 20px;
-  }
-  .drop-down {
-    height: 50px;
-    width: 120px;
-    font-size: 19px;
-    margin: auto 10px;
   }
   .genres ul {
     padding: 0 0 0 1.3em;

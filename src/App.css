@@ -2,12 +2,13 @@
   background-color: #0f1412;
   color: white;
   height: 100vh;
+  width: 100vw;
   overflow: auto;
 }
 
 nav {
   display: grid;
-  grid-template-columns: 33% 33% 34%;
+  grid-template-columns: 33% 33% 33%;
   grid-column-gap: 15px;
   justify-items: center;
   padding: 50px 40px;
@@ -15,12 +16,19 @@ nav {
 }
 
 .link {
+  display: flex;
   text-decoration: none;
   color: white;
-  font-size: 55px;
+  font-size: 60px;
   transition: all 0.3s ease-in-out;
+}
+
+h1 {
+  margin: 15px;
 }
 
 .link:hover {
   color: rgb(80, 112, 76);
 }
+
+

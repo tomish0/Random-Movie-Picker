@@ -7,6 +7,7 @@ import RandomFavPick from "./Components/RandomFavPick";
 import RandomPick from "./Components/RandomPick";
 import "./App.css";
 import "./Styles/AllMovies.css";
+import "./Styles/media-queries.css";
 
 class App extends Component {
   // Constructor used to either start the app with the local storage data or empty arrays
@@ -140,7 +141,7 @@ class App extends Component {
             onClick={() => this.findRandomMovie()}
             className="link random-pick-movies"
           >
-            <h1>Random Movie</h1>
+            <h1>Random</h1><h1>Movie</h1>
           </Link>
           {/* only if there is more than 1 favourite movie can you randomly find */}
           {this.state.favourites.length > 1 ? (
@@ -149,7 +150,7 @@ class App extends Component {
               onClick={() => this.findRandomFavMovie()}
               className="link random-pick-fav-movies"
             >
-              <h1>Random Favourite</h1>
+              <h1>Random</h1><h1>Favourite</h1> 
             </Link>
           ) : null}
         </nav>

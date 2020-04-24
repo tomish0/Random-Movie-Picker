@@ -12,17 +12,13 @@ class RandomPick extends Component {
           <small>({randomMovie.year})</small>
         </div>
         <div className="random-pick-main-wrapper">
-          <div className='img-container'>
-            <img
-              src={randomMovie.posterUrl}
-              alt={randomMovie.title}
-            ></img>
+          <div className="img-container">
+            <img src={randomMovie.posterUrl} alt={randomMovie.title}></img>
           </div>
           <div className="details">
             <div className="director">
               <strong>Director:</strong> {randomMovie.director}
             </div>
-            {/* Actors are in a string, not array, can't map */}
             <div className="actor">
               <strong>Actors:</strong> {randomMovie.actors}
             </div>

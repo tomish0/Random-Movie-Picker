@@ -140,8 +140,7 @@ class App extends Component {
             onClick={() => this.findRandomMovie()}
             className="link random-pick-movies"
           >
-            <h1>Random</h1>
-            <h1>Movie</h1>
+            <h1>Random</h1><h1>Movie</h1>
           </Link>
           {this.state.favourites.length > 1 ? (
             <Link
@@ -149,8 +148,7 @@ class App extends Component {
               onClick={() => this.findRandomFavMovie()}
               className="link random-pick-fav-movies"
             >
-              <h1>Random</h1>
-              <h1>Favourite</h1>
+              <h1>Random</h1><h1>Favourite</h1> 
             </Link>
           ) : null}
         </nav>
@@ -199,7 +197,8 @@ class App extends Component {
                     genreSelection={this.state.genreSelection}
                   />
                 </div>
-              ) : this.state.haveMovies ? (
+              ) : 
+              this.state.haveMovies ? (
                 <div>
                   <h2>All Movies</h2>
                   <GenreFilter

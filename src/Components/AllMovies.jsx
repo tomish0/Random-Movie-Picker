@@ -2,10 +2,15 @@ import React, { Component } from "react";
 
 class AllMovies extends Component {
   render() {
+    /* if there are filteredFilms & genreSelection isn't All then show the filteredFilms
+     each film has button that calls addFavMovie in App to add movie to favourites array */
+    /* if a genre has been selected, thus showing filteredFilms array, but the array is empty
+    and the genre isn't either nothing or All,
+    then show message;
+    solves issue of selecting genre and reverting to allMovies array - logic below */
+    /* else, show all movies */
     const { allMovies, filteredFilms, genreSelection } = this.props;
     return (
-      // if there are filteredFilms & genreSelection isn't All then show the filteredFilms
-      // each film has button that calls addFavMovie in App to add movie to favourites array
       <div className="all-movies">
         {filteredFilms.length > 0 && genreSelection !== "All" ? (
           <div className="movie-wrapper">
@@ -24,18 +29,13 @@ class AllMovies extends Component {
               );
             })}
           </div>
-        ) : // if a genre has been selected, thus showing filteredFilms array, but the array is empty
-        // and the genre isn't either nothing or All
-        // then show message
-        // solves issue of selecting genre and reverting to allMovies array - logic below
-        filteredFilms.length === 0 &&
+        ) : filteredFilms.length === 0 &&
           genreSelection !== "All" &&
           genreSelection !== "" ? (
           <div className="filter-empty-message">
             {genreSelection} Movies are your Favourites!
           </div>
         ) : (
-          // else, show allMovies
           <div className="movie-wrapper">
             {allMovies.map((movie, i) => {
               return (

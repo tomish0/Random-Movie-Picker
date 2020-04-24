@@ -22,7 +22,6 @@ class RandomFavPick extends Component {
             <div className="director">
               <strong>Director:</strong> {randomFavMovie.director}
             </div>
-            {/* Actors are in a string, not array, can't map */}
             <div className="actor">
               <strong>Actors:</strong> {randomFavMovie.actors}
             </div>

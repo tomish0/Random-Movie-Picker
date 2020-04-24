@@ -7,27 +7,34 @@
 }
 
 nav {
-  display: grid;
-  grid-template-columns: 33% 33% 33%;
-  justify-items: center;
-  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 30px;
   background-image: linear-gradient(to bottom, rgb(80, 112, 76) 20%, #0f1412);
+}
+
+.home {
+  margin: 0 auto;
+}
+
+.random-picks {
+  display: flex;
+  justify-content: space-between;
 }
 
 .link {
   display: flex;
   text-decoration: none;
   color: white;
-  font-size: 60px;
+  font-size: 30px;
   transition: all 0.3s ease-in-out;
-  padding: 0 15px;
+  text-align: center;
 }
 
 h1 {
-  margin: 15px;
+  margin: 8px;
 }
 
 .link:hover {
   color: rgb(80, 112, 76);
 }
-

@@ -1,13 +1,16 @@
 .genre-filter-wrapper {
-  font-size: 45px;
+  font-size: 25px;
   width: max-content;
-  margin: 40px auto;
+  margin: 30px auto;
+  
 }
 
 .drop-down {
   border: 1px solid black;
   margin: auto 15px;
   height: 2.1em;
-  width: 5.7em;
+  width: 6.3em;
   font-size: 0.9em;
+  padding-left: 5px;
 }
+

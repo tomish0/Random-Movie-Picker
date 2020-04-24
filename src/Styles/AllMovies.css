@@ -1,18 +1,18 @@
 /* Favourite Movies & All Movies titles */
 h2 {
-  font-size: 65px;
+  font-size: 35px;
   width: max-content;
-  margin: 50px auto;
+  margin: 30px auto;
 }
 
 .favourites-container {
-    margin-bottom: 100px;
+    margin-bottom: 30px;
 }
 
 /* each movie displayed in grid structure */
 .movie-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(620px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   justify-items: center;
   width: 93%;
   margin: 0 auto;
@@ -24,7 +24,7 @@ h2 {
   flex-direction: column;
   margin: 15px auto;
   text-align: center;
-  font-size: 35px;
+  font-size: 16px;
 }
 
 /* each movie title */
@@ -41,7 +41,7 @@ h2 {
   height: 3.2em;
   width: 6.6em;
   font-size: 0.9em;
-  border-radius: 40px;
+  border-radius: 18px;
   border: 2px solid rgb(80, 112, 76);
   background-color: rgb(88, 168, 119);
   cursor: pointer;
@@ -56,6 +56,6 @@ h2 {
 /* message shown when a genre selected but no movies in associated array */
 .filter-empty-message {
   text-align: center;
-  font-size: 55px;
+  font-size: 30px;
   margin: 50px auto;
 }

@@ -38,3 +38,7 @@ h1 {
 .link:hover {
   color: rgb(80, 112, 76);
 }
+
+.home-link:hover {
+  color: rgb(42, 53, 50);
+}

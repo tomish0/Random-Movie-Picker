@@ -133,8 +133,8 @@ class App extends Component {
       <div className="App">
         <nav>
           <div className="home">
-            <Link to="/" className="link">
-              <h1>Home</h1>
+            <Link to="/" className="link home-link">
+              <h1>HOME</h1>
             </Link>
           </div>
           <div className="random-picks">

@@ -1,27 +1,27 @@
 .random-pick-main {
   margin: 0 20px;
-  font-size: 80px;
+  font-size: 45px;
 }
 
 .title {
   text-align: center;
-  margin: 40px 20px;
+  margin: 10px 0 25px 0;
   padding: 15px;
 }
 
 .title small {
-  font-size: 0.6em;
+  font-size: 0.5em;
 }
 
 .random-pick-main-wrapper {
   display: flex;
   justify-content: space-evenly;
-  max-width: 1750px;
-  margin: 0 auto;
+  max-width: 900px;
+  margin: 20px auto;
 }
 
 .img-container {
-  width: 900px;
+  width: 350px;
   margin-right: 8px;
 }
 
@@ -30,10 +30,9 @@ img {
 }
 
 .details {
-  max-width: 800px;
+  max-width: 450px;
   padding: 5px 15px;
-  font-size: 0.7em;
-  margin-left: 8px;
+  font-size: 0.6em;
 }
 
 .director,

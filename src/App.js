@@ -132,7 +132,6 @@ class App extends Component {
     return (
       <div className="App">
         <nav>
-          {/* Use of browser router to navigate between three routes with 3 links */}
           <Link to="/" className="link home">
             <h1>Home</h1>
           </Link>
@@ -141,16 +140,17 @@ class App extends Component {
             onClick={() => this.findRandomMovie()}
             className="link random-pick-movies"
           >
-            <h1>Random</h1><h1>Movie</h1>
+            <h1>Random</h1>
+            <h1>Movie</h1>
           </Link>
-          {/* only if there is more than 1 favourite movie can you randomly find */}
           {this.state.favourites.length > 1 ? (
             <Link
               to="/random-pick-fav-movies"
               onClick={() => this.findRandomFavMovie()}
               className="link random-pick-fav-movies"
             >
-              <h1>Random</h1><h1>Favourite</h1> 
+              <h1>Random</h1>
+              <h1>Favourite</h1>
             </Link>
           ) : null}
         </nav>
@@ -179,7 +179,6 @@ class App extends Component {
             exact
             path="/"
             component={() =>
-              // if there are any favourite movies then FavouriteMovies comp is shown
               this.state.favourites.length > 0 ? (
                 <div>
                   <FavouriteMovies
@@ -200,8 +199,7 @@ class App extends Component {
                     genreSelection={this.state.genreSelection}
                   />
                 </div>
-              ) : // if true (componentDidMount has been called & we have data), then comps are shown
-              this.state.haveMovies ? (
+              ) : this.state.haveMovies ? (
                 <div>
                   <h2>All Movies</h2>
                   <GenreFilter

@@ -49,7 +49,8 @@ class App extends Component {
       .then((response) => {
         return response.json();
       })
-      .then((data) => {
+      .then((data) => {   
+        console.log(data);     
         if (JSON.parse(localStorage.getItem("allMovies")) === null) {
           localStorage.setItem("allMovies", JSON.stringify(data.movies));
           localStorage.setItem("genres", JSON.stringify(data.genres));
@@ -57,6 +58,7 @@ class App extends Component {
         const allMovies = JSON.parse(localStorage.getItem("allMovies"));
         const genres = JSON.parse(localStorage.getItem("genres"));
         this.setState({ allMovies, genres, haveMovies: true });
+        
       })
       .catch((err) => {
         console.log(err);

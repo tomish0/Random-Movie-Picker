@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Route, Link, Switch } from "react-router-dom";
+import testImage from "./testImage";
 import GenreFilter from "./Components/GenreFilter";
 import AllMovies from "./Components/AllMovies";
 import FavouriteMovies from "./Components/FavouriteMovies";
@@ -28,7 +29,6 @@ class App extends Component {
     this.state = {
       allMovies: this.allMovies, // array of all the movies accessed from the api
       genres: this.genres, // array of all the genres accessed from the api
-      haveMovies: false, // boolean to allow componentDidMount to be called before showing content
       favourites: this.favourites, // array of the chosen favourite movies
       filteredFilms: [], // array of movies after filter occurs
       randomMovie: {}, // single movie object chosen randomly from allMovies array
@@ -39,10 +39,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // once received movie data from api check if local storage already has the data
-    // if no, then put api data into local storage
-    // then, get data from local storage and put into the state
-    // also set boolean haveMovies to true so content can render in render()
     fetch(
       "https://raw.githubusercontent.com/wildcodeschoolparis/datas/master/movies.json"
     )
@@ -50,14 +46,66 @@ class App extends Component {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        console.log(data.movies);
+        var newMoviesList = []; // array to hold all movies that have a valid image link
+        // intially check if you already have allMovies in your local storage
+        // if you don't (initial load of app) then perform asynchronous Promise task of checking
+        // if each movie's image is valid with testImage from "./testImage.js"
         if (JSON.parse(localStorage.getItem("allMovies")) === null) {
-          localStorage.setItem("allMovies", JSON.stringify(data.movies));
-          localStorage.setItem("genres", JSON.stringify(data.genres));
+          data.movies.forEach((movie) => {
+            testImage(movie.posterUrl).then(
+              function fulfilled() {
+                // valid image link so put movie into newMoviesList
+                newMoviesList.push(movie);
+                // call finish function
+                finish();
+              },
+              function rejected() {
+                // non-valid image link so ignore
+                // call finish function
+                finish();
+              }
+            );
+          });
+          var waiting = data.movies.length; // used to handle finish of asynchronous task
+          // finish is called to remove 1 each time from waiting
+          // once waiting goes to 0 meaning you have looped through all the movies
+          // & performed the asynchronous task on each
+          // then you can call your addToState function & add the new movies list to the state
+          const finish = () => {
+            waiting--;
+            if (waiting === 0) {
+              addToState(newMoviesList);
+            }
+          };
+          // function called to add movies & genres to local storage & then state
+          const addToState = (newMoviesList) => {
+            // remove any genres that no movies in your new array includes
+            // add this new genres array to the state, meaning all your options 
+            // in the dropdown genres menu will have associated movies  
+            var validGenres = [];
+            data.genres.forEach((genre) => {
+              newMoviesList.forEach((movie) => {
+                if (
+                  movie.genres.includes(genre) &&
+                  !validGenres.includes(genre)
+                ) {
+                  validGenres.push(genre);
+                }
+              });
+            });
+            localStorage.setItem("allMovies", JSON.stringify(newMoviesList));
+            localStorage.setItem("genres", JSON.stringify(validGenres));
+            const allMovies = JSON.parse(localStorage.getItem("allMovies"));
+            const genres = JSON.parse(localStorage.getItem("genres"));
+            this.setState({ allMovies, genres });
+          };
+        } else {
+          // allMovies already stored in localStorage so get & add to state
+          const allMovies = JSON.parse(localStorage.getItem("allMovies"));
+          const genres = JSON.parse(localStorage.getItem("genres"));
+          this.setState({ allMovies, genres });
         }
-        const allMovies = JSON.parse(localStorage.getItem("allMovies"));
-        const genres = JSON.parse(localStorage.getItem("genres"));
-        this.setState({ allMovies, genres, haveMovies: true });
       })
       .catch((err) => {
         console.log(err);
@@ -205,7 +253,7 @@ class App extends Component {
                     genreSelection={this.state.genreSelection}
                   />
                 </div>
-              ) : this.state.haveMovies ? (
+              ) : this.state.allMovies.length > 0 ? (
                 <div>
                   <h2>All Movies</h2>
                   <GenreFilter

@@ -17,6 +17,11 @@ class AllMovies extends Component {
             {filteredFilms.map((filteredFilm, i) => {
               return (
                 <div className="each-movie" key={i}>
+                  <div
+                  style={{ backgroundImage: `url(${filteredFilm.posterUrl})` }}
+                  className='each-movie-poster'
+                />
+                  {/* <img src={filteredFilm.posterUrl} alt={filteredFilm.title} /> */}
                   <strong>{filteredFilm.title}</strong> ({filteredFilm.year})
                   <button
                     onClick={() => {
@@ -40,6 +45,11 @@ class AllMovies extends Component {
             {allMovies.map((movie, i) => {
               return (
                 <div className="each-movie" key={i}>
+                  <div
+                  style={{ backgroundImage: `url(${movie.posterUrl})` }}
+                  className='each-movie-poster'
+                />
+                  {/* <img src={movie.posterUrl} alt={movie.title} /> */}
                   <strong>{movie.title}</strong> ({movie.year})
                   <button
                     onClick={() => {

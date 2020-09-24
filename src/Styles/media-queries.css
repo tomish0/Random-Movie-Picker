@@ -14,6 +14,10 @@
   .each-movie {
     font-size: 14px;
   }
+  .each-movie-poster {
+    height: 375px;
+    width: 250px;
+  }
   .genre-filter-wrapper {
     font-size: 18px;
   }
@@ -45,6 +49,10 @@
   .each-movie {
     font-size: 12px;
   }
+  .each-movie-poster {
+    height: 300px;
+    width: 200px;
+  }
   .genre-filter-wrapper {
     font-size: 16px;
   }
@@ -69,6 +77,10 @@
   .each-movie {
     font-size: 11px;
   }
+  .each-movie-poster {
+    height: 270px;
+    width: 180px;
+  }
   .genre-filter-wrapper {
     font-size: 14px;
   }
@@ -91,7 +103,6 @@
   .link {
     display: block;
     line-height: 100%;
-    /* text-align: center; */
   }
   .random-pick-main {
     margin: 0 10px;
@@ -113,6 +124,10 @@
   }
   .random-pick-main {
     font-size: 20px;
+  }
+  .each-movie-poster {
+    height: 222px;
+    width: 148px;
   }
 }
 

@@ -12,7 +12,7 @@ h2 {
 /* each movie displayed in grid structure */
 .movie-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   justify-items: center;
   width: 93%;
   margin: 0 auto;
@@ -35,10 +35,10 @@ h2 {
 }
 
 .each-movie-poster {
-  background-position: cover; 
+  background-position: cover;
   background-size: cover;
-  height: 450px;
-  width: 300px;
+  height: 360px;
+  width: 240px;
 }
 
 .each-movie button {
@@ -51,7 +51,8 @@ h2 {
   width: 6.6em;
   font-size: 0.9em;
   border-radius: 18px;
-  border: 2px solid rgb(80, 112, 76);
+  box-shadow: 0px 0px 10px 0px rgb(80, 112, 76);
+  border: none;
   background-color: rgb(88, 168, 119);
   cursor: pointer;
   outline: none;

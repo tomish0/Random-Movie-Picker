@@ -1,5 +1,5 @@
 .App {
-  background-color: #0f1412;
+  background-color: #131a17;
   color: white;
   height: 100vh;
   width: 100vw;
@@ -9,8 +9,8 @@
 nav {
   display: flex;
   flex-direction: column;
-  padding: 20px 30px;
-  background-image: linear-gradient(to bottom, rgb(80, 112, 76) 20%, #0f1412);
+  padding: 15px 20px;
+  background-image: linear-gradient(to bottom, rgb(80, 112, 76) 20%, #131a17);
 }
 
 .home {
@@ -26,7 +26,7 @@ nav {
   display: flex;
   text-decoration: none;
   color: white;
-  font-size: 30px;
+  font-size: 25px;
   transition: all 0.3s ease-in-out;
   text-align: center;
 }

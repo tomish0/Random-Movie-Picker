@@ -8,15 +8,8 @@
   h2 {
     font-size: 30px;
   }
-  .movie-wrapper {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  }
   .each-movie {
     font-size: 14px;
-  }
-  .each-movie-poster {
-    height: 375px;
-    width: 250px;
   }
   .genre-filter-wrapper {
     font-size: 18px;

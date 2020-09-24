@@ -50,6 +50,7 @@ class App extends Component {
         return response.json();
       })
       .then((data) => {
+        console.log(data);
         if (JSON.parse(localStorage.getItem("allMovies")) === null) {
           localStorage.setItem("allMovies", JSON.stringify(data.movies));
           localStorage.setItem("genres", JSON.stringify(data.genres));

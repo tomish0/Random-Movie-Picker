@@ -73,6 +73,7 @@ class App extends Component {
       if (movie.genres.includes(genreSelection)) {
         filteredFilms.unshift(movie);
       }
+      return null;
     });
     this.setState({ filteredFilms, genreSelection });
   };

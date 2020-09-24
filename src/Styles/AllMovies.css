@@ -36,6 +36,7 @@ h2 {
 .each-movie button {
   display: flex;
   justify-content: center;
+  align-items: center;
   color: white;
   margin: 15px auto;
   height: 3.2em;
@@ -52,6 +53,8 @@ h2 {
 .each-movie button:hover {
   background-color: rgb(80, 112, 76);
 }
+
+
 
 /* message shown when a genre selected but no movies in associated array */
 .filter-empty-message {
